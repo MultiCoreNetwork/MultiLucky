@@ -1,0 +1,33 @@
+######################################################
+#                     MultiLucky                     #
+#                                                    #
+#                    developed by                    #
+#                       DanTTV                       #
+#                                                    #
+#                 (multicore.network)                #
+######################################################
+
+features:
+  #Normal LuckyBlock
+  luckyblock: true
+  #Vip LuckyBlock
+  luckyblock-vip: true
+  #[COMING SOON] Use NBTs to distinguish LuckyBlocks from regular sponges.
+  #[COMING SOON] If use-nbts is false, all sponges will be considered LuckyBlocks
+  use-nbts: false
+
+messages:
+  prefix: "&6[MultiLucky] &r"
+  luckyblock: "&eYou got from LuckyBlock: &b%item%"
+  luckyblock-vip: "&eYou got form LuckyBlock Vip: &b%item%"
+  invalid-usage: "&cInvalid usage! Type /ml to see an help message!"
+  invalid-player: "&cThis player isn't online!"
+  invalid-type: "&cInvalid type of LuckyBlock! You can choose between 'normal' and 'vip'!"
+  invalid-amount: "&cThe amount you entered isn't a number!"
+  reload: "&eMultiLucky &areloaded successfully!"
+  console: "&cOnly players can run this command!"
+help-messages:
+  params: "&7&oParams between [] are optional, params between <> are mandatory."
+  help: "Show this help message."
+  give: "Gives to one player &eLuckyBlocks"
+  reload: "Reload the plugin and its configurations!"

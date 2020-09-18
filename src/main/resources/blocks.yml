@@ -1,0 +1,28 @@
+#Placeholders available:
+#%player% - Name of player who broke LuckyBlock
+
+luckyblock:
+  #Put the id of the block you want to be a LuckyBlock below
+  #Default: SPONGE
+  material-block: "SPONGE"
+  #Below you can choose the name of LuckyBlock
+  display-name: "&eLuckyBlock"
+  #Below you can choose the chance for each LuckyBlock drop
+  drops:
+    example:
+      cmd: "give %player% diamond 1"
+      chance: 50
+      reward-name: "&bDiamond"
+
+luckyblock-vip:
+  #Put the id of the block you want to be a LuckyBlock Vip below
+  #Default: WET_SPONGE
+  material-block: "WET_SPONGE"
+  #Below you can choose the name of LuckyBlock
+  display-name: "&6Vip &eLuckyBlock"
+  #Below you can choose the chance for each LuckyBlock Vip drop
+  drops:
+    example:
+      cmd: "give %player% diamond 1"
+      chance: 50
+      reward-name: "&bDiamond"

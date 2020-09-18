@@ -1,0 +1,11 @@
+name: MultiLucky
+main: it.multicoredev.multilucky.MultiLucky
+version: 1.0.0
+api-version: 1.16
+author: DanTTV
+depend: [MCCore]
+
+commands:
+  multilucky:
+    aliases: [ml, mlucky]
+    description: MultiLucky
