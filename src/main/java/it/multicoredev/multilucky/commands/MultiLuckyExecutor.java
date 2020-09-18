@@ -128,9 +128,9 @@ public class MultiLuckyExecutor implements CommandExecutor {
 
             if (!(itemMeta == null)) {
                 if (isVip) {
-                    itemMeta.setDisplayName(blocks.getString("luckyblock-vip.display-name"));
+                    itemMeta.setDisplayName(Chat.getTranslated(blocks.getString("luckyblock-vip.display-name")));
                 } else {
-                    itemMeta.setDisplayName(blocks.getString("luckyblock.display-name"));
+                    itemMeta.setDisplayName(Chat.getTranslated(blocks.getString("luckyblock.display-name")));
                 }
             }
 
@@ -149,7 +149,7 @@ public class MultiLuckyExecutor implements CommandExecutor {
             plugin.onDisable();
             plugin.onEnable();
 
-            Chat.send(sendMessage("messages.reload"), sender);
+            Chat.send(sendMessage(config.getString("messages.reload")), sender);
             return true;
         }
 
