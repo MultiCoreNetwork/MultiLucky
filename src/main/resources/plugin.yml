@@ -3,7 +3,7 @@ main: it.multicoredev.multilucky.MultiLucky
 version: 1.0.0
 api-version: 1.16
 author: DanTTV
-depend: [MCCore]
+softdepend: [MCCore]
 
 commands:
   multilucky:
