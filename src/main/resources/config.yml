@@ -19,7 +19,10 @@ features:
 messages:
   prefix: "&6[MultiLucky] &r"
   luckyblock: "&eYou got from LuckyBlock: &b%item%"
+  luckyblock-no-perms: "&cYou don't have permissions for break &eLuckyBlocks"
   luckyblock-vip: "&eYou got form LuckyBlock Vip: &b%item%"
+  luckyblock-vip-no-perms: "&cYou don't have permissions for break &6Vip &eLuckyBlocks"
+  insufficient-perms: "&cInsufficient permissions!"
   invalid-usage: "&cInvalid usage! Type /ml to see an help message!"
   invalid-player: "&cThis player isn't online!"
   invalid-type: "&cInvalid type of LuckyBlock! You can choose between 'normal' and 'vip'!"
