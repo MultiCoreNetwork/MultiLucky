@@ -107,10 +107,10 @@ public class MultiLuckyExecutor implements CommandExecutor {
             if (!isNewer()) {
                 if (type.equalsIgnoreCase("vip")) {
                     isVip = true;
-                    material = Bukkit.getUnsafe().getMaterial(vip, Integer.parseInt(version));
+                    material = Bukkit.getUnsafe().getMaterial(vip, amount);
                 } else {
                     isVip = false;
-                    material = Bukkit.getUnsafe().getMaterial(normal, Integer.parseInt(version));
+                    material = Bukkit.getUnsafe().getMaterial(normal, amount);
                 }
 
                 if (material == null) return true;
