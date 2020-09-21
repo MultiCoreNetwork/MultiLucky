@@ -1,4 +1,4 @@
-# MultiLucky [1.8.x-1.16.x]
+# MultiLucky [1.8-1.16.3]
 [![Build Status](https://multicoredev.it/buildStatus/icon?job=MultiLucky)](https://multicoredev.it/job/MultiLucky/)
 
 ## Description
