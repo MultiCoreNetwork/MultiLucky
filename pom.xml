@@ -6,7 +6,7 @@
 
     <groupId>it.multicoredev.multilucky</groupId>
     <artifactId>MultiLucky</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.5</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -23,7 +23,8 @@
 
     <licenses>
         <license>
-            <name>All right reserved</name>
+            <name>The BSD 3-Clause License</name>
+            <url>http://opensource.org/licenses/BSD-3-Clause</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
@@ -54,11 +55,6 @@
             <artifactId>MCLib</artifactId>
             <version>1.6.1.6</version>
             <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.8.6</version>
         </dependency>
     </dependencies>
 

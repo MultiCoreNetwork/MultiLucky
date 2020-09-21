@@ -32,8 +32,8 @@ import java.util.LinkedList;
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 public class MultiLucky extends JavaPlugin {
-    private Configuration config;
-    private Configuration blocks;
+    public static Configuration config;
+    public static Configuration blocks;
     private LinkedList<String> cmds;
     private LinkedList<String> cmdsName;
     private LinkedList<String> cmdsVip;

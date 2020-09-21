@@ -2,6 +2,9 @@ package it.multicoredev.multilucky.commands;
 
 import it.multicoredev.mbcore.spigot.Chat;
 import it.multicoredev.mclib.yaml.Configuration;
+import it.multicoredev.multilucky.ItemStack.ItemStackHelper;
+import it.multicoredev.multilucky.ItemStack.ItemStackHelper_1_12;
+import it.multicoredev.multilucky.ItemStack.ItemStackHelper_1_13;
 import it.multicoredev.multilucky.MultiLucky;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -38,6 +41,7 @@ public class MultiLuckyExecutor implements CommandExecutor {
     private final Configuration config;
     private final Configuration blocks;
     private final String version = Bukkit.getBukkitVersion();
+    private ItemStackHelper itemStackHelper;
 
     public MultiLuckyExecutor(MultiLucky plugin, Configuration config, Configuration blocks) {
         this.plugin = plugin;
@@ -95,43 +99,22 @@ public class MultiLuckyExecutor implements CommandExecutor {
                     return true;
                 }
             }
+            initItemStackHelper();
 
-            Material material;
-
+            ItemStack itemStack;
             String vip = blocks.getString("luckyblock-vip.material-block");
             String normal = blocks.getString("luckyblock.material-block");
-
-            ItemStack item;
             boolean isVip;
 
-            if (!isNewer()) {
-                if (type.equalsIgnoreCase("vip")) {
-                    isVip = true;
-                    material = Bukkit.getUnsafe().getMaterial(vip, amount);
-                } else {
-                    isVip = false;
-                    material = Bukkit.getUnsafe().getMaterial(normal, amount);
-                }
-
-                if (material == null) return true;
-                byte data = getData(material);
-
-                item = new ItemStack(material, amount, (short) 0, data);
+            if (type.equalsIgnoreCase("vip")) {
+                isVip = true;
+                itemStack = itemStackHelper.getItemStack(vip, amount, true);
             } else {
-                if (type.equalsIgnoreCase("vip")) {
-                    isVip = true;
-                    material = Material.getMaterial(vip);
-                } else {
-                    isVip = false;
-                    material = Material.getMaterial(normal);
-                }
-
-                if (material == null) return true;
-
-                item = new ItemStack(material, amount);
+                isVip = false;
+                itemStack = itemStackHelper.getItemStack(normal, amount, false);
             }
 
-            ItemMeta itemMeta = item.getItemMeta();
+            ItemMeta itemMeta = itemStack.getItemMeta();
 
             if (!(itemMeta == null)) {
                 if (isVip) {
@@ -140,14 +123,13 @@ public class MultiLuckyExecutor implements CommandExecutor {
                     itemMeta.setDisplayName(Chat.getTranslated(blocks.getString("luckyblock.display-name")));
                 }
             }
-
-            item.setItemMeta(itemMeta);
+            itemStack.setItemMeta(itemMeta);
             PlayerInventory inventory = player.getInventory();
 
             if (config.getBoolean("features.use-nbts")) {
                 //TODO use-nbts
             } else {
-                inventory.addItem(item);
+                inventory.addItem(itemStack);
                 return true;
             }
 
@@ -163,11 +145,12 @@ public class MultiLuckyExecutor implements CommandExecutor {
         return true;
     }
 
-    private boolean isNewer() {
-        if (version.startsWith("1.13")) return true;
-        else if (version.startsWith("1.14")) return true;
-        else if (version.startsWith("1.15")) return true;
-        else return version.startsWith("1.16");
+    private void initItemStackHelper() {
+        if (version.startsWith("1.13")) itemStackHelper = new ItemStackHelper_1_13();
+        else if (version.startsWith("1.14")) itemStackHelper = new ItemStackHelper_1_13();
+        else if (version.startsWith("1.15")) itemStackHelper = new ItemStackHelper_1_13();
+        else if (version.startsWith("1.16")) itemStackHelper = new ItemStackHelper_1_13();
+        else itemStackHelper = new ItemStackHelper_1_12();
     }
 
     private byte getData(Material material) {

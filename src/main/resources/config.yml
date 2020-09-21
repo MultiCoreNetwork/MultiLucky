@@ -27,6 +27,8 @@ messages:
   invalid-player: "&cThis player isn't online!"
   invalid-type: "&cInvalid type of LuckyBlock! You can choose between 'normal' and 'vip'!"
   invalid-amount: "&cThe amount you entered isn't a number!"
+  invalid-material: "&cInvalid LuckyBlock material block, check the config!"
+  invalid-material-vip: "&cInvalid LuckyBlock Vip material block, check the config!"
   reload: "&eMultiLucky &areloaded successfully!"
   console: "&cOnly players can run this command!"
 help-messages:

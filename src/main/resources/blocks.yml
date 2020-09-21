@@ -2,7 +2,7 @@
 #%player% - Name of player who broke LuckyBlock
 
 luckyblock:
-  #Put the id of the block you want to be a LuckyBlock below
+  #Put the material of the block you want to be a LuckyBlock below
   #Default: SPONGE
   material-block: "SPONGE"
   #Below you can choose the name of LuckyBlock
@@ -15,7 +15,7 @@ luckyblock:
       reward-name: "&bDiamond"
 
 luckyblock-vip:
-  #Put the id of the block you want to be a LuckyBlock Vip below
+  #Put the material of the block you want to be a LuckyBlock Vip below
   #Default: WET_SPONGE
   material-block: "WET_SPONGE"
   #Below you can choose the name of LuckyBlock
