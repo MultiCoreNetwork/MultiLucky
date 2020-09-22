@@ -35,8 +35,6 @@ public class ItemStackHelper_1_13 implements ItemStackHelper {
             return null;
         }
 
-        ItemStack itemStack = new ItemStack(block, amount);
-
-        return itemStack;
+        return new ItemStack(block, amount);
     }
 }

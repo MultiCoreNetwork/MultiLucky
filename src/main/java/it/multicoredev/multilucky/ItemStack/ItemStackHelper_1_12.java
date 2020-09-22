@@ -24,14 +24,16 @@ public class ItemStackHelper_1_12 implements ItemStackHelper {
     @SuppressWarnings("deprecation")
     public ItemStack getItemStack(String material, int amount, boolean isVip) {
         Configuration config = MultiLucky.config;
-        Material block = null;
+        Material block;
         byte data;
 
         if (material.equalsIgnoreCase("WET_SPONGE")) {
             block = Material.getMaterial("SPONGE");
             data = 1;
+        } else {
+            block = Material.getMaterial(material);
+            data = 0;
         }
-        else data = 0;
 
         if (block == null) {
             if (isVip) {
@@ -42,8 +44,6 @@ public class ItemStackHelper_1_12 implements ItemStackHelper {
 
             return null;
         }
-
-
 
         return new ItemStack(block, amount, (short) 0, data);
     }
