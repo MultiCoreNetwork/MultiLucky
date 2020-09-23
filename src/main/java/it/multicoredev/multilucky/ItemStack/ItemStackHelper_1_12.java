@@ -1,6 +1,7 @@
 package it.multicoredev.multilucky.ItemStack;
 
 import it.multicoredev.mbcore.spigot.Chat;
+import it.multicoredev.mclib.misc.KeyVal;
 import it.multicoredev.mclib.yaml.Configuration;
 import it.multicoredev.multilucky.MultiLucky;
 import org.bukkit.Material;
@@ -46,5 +47,21 @@ public class ItemStackHelper_1_12 implements ItemStackHelper {
         }
 
         return new ItemStack(block, amount, (short) 0, data);
+    }
+
+    @Override
+    public KeyVal<Material, Byte> getMaterial(String material) {
+        Material block;
+        byte data;
+
+        if (material.equalsIgnoreCase("WET_SPONGE")) {
+            block = Material.getMaterial("SPONGE");
+            data = 1;
+        } else {
+            block = Material.getMaterial(material);
+            data = 0;
+        }
+
+        return new KeyVal<>(block, data);
     }
 }

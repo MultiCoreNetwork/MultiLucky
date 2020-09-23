@@ -3,11 +3,9 @@ package it.multicoredev.multilucky.commands;
 import it.multicoredev.mbcore.spigot.Chat;
 import it.multicoredev.mclib.yaml.Configuration;
 import it.multicoredev.multilucky.ItemStack.ItemStackHelper;
-import it.multicoredev.multilucky.ItemStack.ItemStackHelper_1_12;
-import it.multicoredev.multilucky.ItemStack.ItemStackHelper_1_13;
 import it.multicoredev.multilucky.MultiLucky;
+import it.multicoredev.multilucky.Utils;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -40,8 +38,6 @@ public class MultiLuckyExecutor implements CommandExecutor {
     private final MultiLucky plugin;
     private final Configuration config;
     private final Configuration blocks;
-    private final String version = Bukkit.getBukkitVersion();
-    private ItemStackHelper itemStackHelper;
 
     public MultiLuckyExecutor(MultiLucky plugin, Configuration config, Configuration blocks) {
         this.plugin = plugin;
@@ -99,18 +95,17 @@ public class MultiLuckyExecutor implements CommandExecutor {
                     return true;
                 }
             }
-            initItemStackHelper();
+            ItemStackHelper itemStackHelper = Utils.initItemStackHelper();
 
             ItemStack itemStack;
             String vip = blocks.getString("luckyblock-vip.material-block");
             String normal = blocks.getString("luckyblock.material-block");
-            boolean isVip;
+            boolean isVip = false;
 
             if (type.equalsIgnoreCase("vip")) {
                 isVip = true;
                 itemStack = itemStackHelper.getItemStack(vip, amount, true);
             } else {
-                isVip = false;
                 itemStack = itemStackHelper.getItemStack(normal, amount, false);
             }
 
@@ -143,19 +138,6 @@ public class MultiLuckyExecutor implements CommandExecutor {
         }
 
         return true;
-    }
-
-    private void initItemStackHelper() {
-        if (version.startsWith("1.13")) itemStackHelper = new ItemStackHelper_1_13();
-        else if (version.startsWith("1.14")) itemStackHelper = new ItemStackHelper_1_13();
-        else if (version.startsWith("1.15")) itemStackHelper = new ItemStackHelper_1_13();
-        else if (version.startsWith("1.16")) itemStackHelper = new ItemStackHelper_1_13();
-        else itemStackHelper = new ItemStackHelper_1_12();
-    }
-
-    private byte getData(Material material) {
-        if (material.toString().equalsIgnoreCase("WET_SPONGE")) return 1;
-        else return 0;
     }
 
     private void sendHelp(Player player) {

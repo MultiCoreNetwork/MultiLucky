@@ -1,7 +1,9 @@
-package it.multicoredev.multilucky.ItemStack;
+package it.multicoredev.multilucky;
 
-import it.multicoredev.mclib.misc.KeyVal;
-import org.bukkit.inventory.ItemStack;
+import it.multicoredev.multilucky.ItemStack.ItemStackHelper;
+import it.multicoredev.multilucky.ItemStack.ItemStackHelper_1_12;
+import it.multicoredev.multilucky.ItemStack.ItemStackHelper_1_13;
+import org.bukkit.Bukkit;
 
 /**
  * Copyright © 2020 Daniele Patella. All rights reserved.
@@ -16,8 +18,22 @@ import org.bukkit.inventory.ItemStack;
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
-public interface ItemStackHelper {
-    ItemStack getItemStack(String material, int amount, boolean isVip);
+public class Utils {
+    private static final String version = Bukkit.getBukkitVersion();
 
-    KeyVal getMaterial(String material);
+    public static ItemStackHelper initItemStackHelper() {
+        if (isLegacy()) {
+            return new ItemStackHelper_1_12();
+        } else {
+            return new ItemStackHelper_1_13();
+        }
+    }
+
+    private static boolean isLegacy() {
+        if (version.startsWith("1.13")) return false;
+        else if (version.startsWith("1.14")) return false;
+        else if (version.startsWith("1.15")) return false;
+        else if (version.startsWith("1.16")) return false;
+        else return true;
+    }
 }

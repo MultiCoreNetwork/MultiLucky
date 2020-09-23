@@ -50,10 +50,12 @@ public class MultiLucky extends JavaPlugin {
         }
 
         getServer().getPluginManager().registerEvents(new OnLuckyBreak(config, blocks, cmds, cmdsName, cmdsVip, cmdsVipName), this);
+        //TODO fix
+        //getServer().getPluginManager().registerEvents(new OnLuckyUpdate(blocks), this);
         getCommand("multilucky").setExecutor(new MultiLuckyExecutor(this, config, blocks));
         getCommand("multilucky").setTabCompleter(new MultiLuckyCompleter());
 
-        Chat.info("&eMultiLucky loaded and enabled");
+        Chat.info("&eMultiLucky &2loaded and enabled&e!");
     }
 
     private void initConfig() throws IOException {
@@ -108,6 +110,6 @@ public class MultiLucky extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        Chat.info("&eMultiLucky disabled");
+        Chat.info("&eMultiLucky &cdisabled");
     }
 }

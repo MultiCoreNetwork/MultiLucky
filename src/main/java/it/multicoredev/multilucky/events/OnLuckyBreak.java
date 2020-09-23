@@ -1,8 +1,11 @@
 package it.multicoredev.multilucky.events;
 
 import it.multicoredev.mbcore.spigot.Chat;
+import it.multicoredev.mclib.misc.KeyVal;
 import it.multicoredev.mclib.yaml.Configuration;
+import it.multicoredev.multilucky.ItemStack.ItemStackHelper;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -11,6 +14,8 @@ import org.bukkit.event.block.BlockBreakEvent;
 
 import java.util.LinkedList;
 import java.util.Random;
+
+import static it.multicoredev.multilucky.Utils.initItemStackHelper;
 
 /**
  * Copyright © 2020 by Daniele Patella
@@ -39,6 +44,7 @@ public class OnLuckyBreak implements Listener {
     private final LinkedList<String> cmdsName;
     private final LinkedList<String> cmdsVip;
     private final LinkedList<String> cmdsVipName;
+    ItemStackHelper itemStackHelper;
 
     public OnLuckyBreak(Configuration config, Configuration blocks, LinkedList<String> cmds, LinkedList<String> cmdsName, LinkedList<String> cmdsVip, LinkedList<String> cmdsVipName) {
         this.config = config;
@@ -51,48 +57,97 @@ public class OnLuckyBreak implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     private void onBlockBreak(BlockBreakEvent event) {
+        itemStackHelper = initItemStackHelper();
+
         if (config.getBoolean("features.use-nbts")) {
             //TODO use-nbts
         } else {
             String blockMaterial = event.getBlock().getType().toString();
-            Player player = event.getPlayer();
-            String cmd;
-            String name;
-            boolean isVip;
+            byte blockData = event.getBlock().getState().getData().getData();
 
-            if (blockMaterial.equals(blocks.getString("luckyblock.material-block"))) {
-                if (config.getBoolean("features.luckyblock")) {
-                    if (!player.hasPermission("multilucky.normal")) {
-                        Chat.send(sendMessage(config.getString("luckyblock-no-perms")), player);
-                        return;
-                    }
-                    isVip = false;
-                    int random = new Random().nextInt(cmdsVip.size());
+            KeyVal normalKeyVal = itemStackHelper.getMaterial(blocks.getString("luckyblock.material-block"));
+            String normal = normalKeyVal.getKey().toString();
+            byte normalData = (byte) normalKeyVal.getValue();
 
-                    cmd = cmdsVip.get(random);
-                    name = cmdsVipName.get(random);
+            KeyVal vipKeyVal = itemStackHelper.getMaterial(blocks.getString("luckyblock-vip.material-block"));
+            String vip = vipKeyVal.getKey().toString();
+            byte vipData = (byte) vipKeyVal.getValue();
+
+            if (blockMaterial.equals(normal) && blockMaterial.equals(vip) && blockData == normalData && blockData == vipData) {
+                Player player = event.getPlayer();
+
+                if (player.hasPermission("multilucky.vip")) {
+                    vipExecute(event);
+                    return;
+                } else if (player.hasPermission("multilucky.normal")) {
+                    normalExecute(event);
+                    return;
                 } else return;
-            } else if (blockMaterial.equals(blocks.getString("luckyblock-vip.material-block"))) {
-                if (config.getBoolean("features.luckyblock-vip")) {
-                    if (!player.hasPermission("multilucky.vip")) {
-                        Chat.send(sendMessage(config.getString("luckyblock-vip-no-perms")), player);
-                        return;
-                    }
-                    isVip = true;
-                    int random = new Random().nextInt(cmdsVip.size());
-
-                    cmd = cmds.get(random);
-                    name = cmdsName.get(random);
-                } else return;
-            } else return;
-
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd.replace("%player%", player.getName()));
-
-            if (isVip) {
-                Chat.send(sendMessage(config.getString("messages.luckyblock-vip").replace("%item%", name)), player);
-            } else {
-                Chat.send(sendMessage(config.getString("messages.luckyblock").replace("%item%", name)), player);
             }
+
+            if (blockMaterial.equals(normal) && blockData == normalData) {
+                normalExecute(event);
+            } else if (blockMaterial.equals(vip) && blockData == vipData) {
+                vipExecute(event);
+            }
+        }
+    }
+
+    private void normalExecute(BlockBreakEvent event) {
+        if (event.getBlock().getState().getData().getData() != blocks.getByte("luckyblock.data")) return;
+        if (!config.getBoolean("features.luckyblock")) return;
+
+        Player player = event.getPlayer();
+        String cmd;
+        String name;
+
+        if (!player.hasPermission("multilucky.normal")) {
+            Chat.send(sendMessage(config.getString("luckyblock-no-perms")), player);
+            return;
+        }
+        int random = new Random().nextInt(cmdsVip.size());
+
+        cmd = cmdsVip.get(random);
+        name = cmdsVipName.get(random);
+
+        commandExecute(cmd, player, false, name);
+
+        event.setCancelled(true);
+        event.getBlock().setType(Material.AIR);
+        event.getBlock().getDrops().clear();
+    }
+
+    private void vipExecute(BlockBreakEvent event) {
+        if (event.getBlock().getState().getData().getData() != blocks.getByte("luckyblock-vip.data")) return;
+        if (!config.getBoolean("features.luckyblock-vip")) return;
+
+        Player player = event.getPlayer();
+        String cmd;
+        String name;
+
+        if (!player.hasPermission("multilucky.vip")) {
+            Chat.send(sendMessage(config.getString("luckyblock-vip-no-perms")), player);
+            return;
+        }
+        int random = new Random().nextInt(cmdsVip.size());
+
+        cmd = cmds.get(random);
+        name = cmdsName.get(random);
+
+        commandExecute(cmd, player, true, name);
+
+        event.setCancelled(true);
+        event.getBlock().setType(Material.AIR);
+        event.getBlock().getDrops().clear();
+    }
+
+    private void commandExecute(String cmd, Player player, boolean isVip, String name) {
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd.replace("%player%", player.getName()));
+
+        if (isVip) {
+            Chat.send(sendMessage(config.getString("messages.luckyblock-vip").replace("%item%", name)), player);
+        } else {
+            Chat.send(sendMessage(config.getString("messages.luckyblock").replace("%item%", name)), player);
         }
     }
 

@@ -5,6 +5,8 @@ luckyblock:
   #Put the material of the block you want to be a LuckyBlock below
   #Default: SPONGE
   material-block: "SPONGE"
+  #Put data of the material block below
+  data: 0
   #Below you can choose the name of LuckyBlock
   display-name: "&eLuckyBlock"
   #Below you can choose the chance for each LuckyBlock drop
@@ -18,6 +20,8 @@ luckyblock-vip:
   #Put the material of the block you want to be a LuckyBlock Vip below
   #Default: WET_SPONGE
   material-block: "WET_SPONGE"
+  #Put data of the material block below
+  data: 1
   #Below you can choose the name of LuckyBlock
   display-name: "&6Vip &eLuckyBlock"
   #Below you can choose the chance for each LuckyBlock Vip drop
