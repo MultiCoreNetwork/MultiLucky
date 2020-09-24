@@ -1,8 +1,8 @@
 package it.multicoredev.multilucky;
 
-import it.multicoredev.multilucky.ItemStack.ItemStackHelper;
-import it.multicoredev.multilucky.ItemStack.ItemStackHelper_1_12;
-import it.multicoredev.multilucky.ItemStack.ItemStackHelper_1_13;
+import it.multicoredev.multilucky.itemStack.ItemStackHelper;
+import it.multicoredev.multilucky.itemStack.ItemStackHelper_1_12;
+import it.multicoredev.multilucky.itemStack.ItemStackHelper_1_13;
 import org.bukkit.Bukkit;
 
 /**

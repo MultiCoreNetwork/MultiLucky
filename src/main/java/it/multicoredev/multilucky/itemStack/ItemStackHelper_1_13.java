@@ -1,4 +1,4 @@
-package it.multicoredev.multilucky.ItemStack;
+package it.multicoredev.multilucky.itemStack;
 
 import it.multicoredev.mbcore.spigot.Chat;
 import it.multicoredev.mclib.misc.KeyVal;
@@ -27,21 +27,11 @@ import org.bukkit.inventory.ItemStack;
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
-public class ItemStackHelper_1_12 implements ItemStackHelper {
+public class ItemStackHelper_1_13 implements ItemStackHelper {
     @Override
-    @SuppressWarnings("deprecation")
     public ItemStack getItemStack(String material, int amount, boolean isVip) {
         Configuration config = MultiLucky.config;
-        Material block;
-        byte data;
-
-        if (material.equalsIgnoreCase("WET_SPONGE")) {
-            block = Material.getMaterial("SPONGE");
-            data = 1;
-        } else {
-            block = Material.getMaterial(material);
-            data = 0;
-        }
+        Material block = Material.getMaterial(material);
 
         if (block == null) {
             if (isVip) {
@@ -53,22 +43,13 @@ public class ItemStackHelper_1_12 implements ItemStackHelper {
             return null;
         }
 
-        return new ItemStack(block, amount, (short) 0, data);
+        return new ItemStack(block, amount);
     }
 
     @Override
     public KeyVal<Material, Byte> getMaterial(String material) {
-        Material block;
-        byte data;
+        Material block = Material.getMaterial(material);
 
-        if (material.equalsIgnoreCase("WET_SPONGE")) {
-            block = Material.getMaterial("SPONGE");
-            data = 1;
-        } else {
-            block = Material.getMaterial(material);
-            data = 0;
-        }
-
-        return new KeyVal<>(block, data);
+        return new KeyVal<>(block, (byte) 0);
     }
 }

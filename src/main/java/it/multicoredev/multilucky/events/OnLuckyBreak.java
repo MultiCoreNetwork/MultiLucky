@@ -3,7 +3,7 @@ package it.multicoredev.multilucky.events;
 import it.multicoredev.mbcore.spigot.Chat;
 import it.multicoredev.mclib.misc.KeyVal;
 import it.multicoredev.mclib.yaml.Configuration;
-import it.multicoredev.multilucky.ItemStack.ItemStackHelper;
+import it.multicoredev.multilucky.itemStack.ItemStackHelper;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

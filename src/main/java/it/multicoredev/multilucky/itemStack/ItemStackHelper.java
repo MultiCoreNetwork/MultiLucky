@@ -1,10 +1,6 @@
-package it.multicoredev.multilucky.ItemStack;
+package it.multicoredev.multilucky.itemStack;
 
-import it.multicoredev.mbcore.spigot.Chat;
 import it.multicoredev.mclib.misc.KeyVal;
-import it.multicoredev.mclib.yaml.Configuration;
-import it.multicoredev.multilucky.MultiLucky;
-import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 /**
@@ -27,29 +23,8 @@ import org.bukkit.inventory.ItemStack;
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
-public class ItemStackHelper_1_13 implements ItemStackHelper {
-    @Override
-    public ItemStack getItemStack(String material, int amount, boolean isVip) {
-        Configuration config = MultiLucky.config;
-        Material block = Material.getMaterial(material);
+public interface ItemStackHelper {
+    ItemStack getItemStack(String material, int amount, boolean isVip);
 
-        if (block == null) {
-            if (isVip) {
-                Chat.severe(config.getString("messages.invalid-material-vip"));
-            } else {
-                Chat.severe(config.getString("messages.invalid-material"));
-            }
-
-            return null;
-        }
-
-        return new ItemStack(block, amount);
-    }
-
-    @Override
-    public KeyVal<Material, Byte> getMaterial(String material) {
-        Material block = Material.getMaterial(material);
-
-        return new KeyVal<>(block, (byte) 0);
-    }
+    KeyVal getMaterial(String material);
 }

@@ -2,7 +2,7 @@ package it.multicoredev.multilucky.commands;
 
 import it.multicoredev.mbcore.spigot.Chat;
 import it.multicoredev.mclib.yaml.Configuration;
-import it.multicoredev.multilucky.ItemStack.ItemStackHelper;
+import it.multicoredev.multilucky.itemStack.ItemStackHelper;
 import it.multicoredev.multilucky.MultiLucky;
 import it.multicoredev.multilucky.Utils;
 import org.bukkit.Bukkit;
