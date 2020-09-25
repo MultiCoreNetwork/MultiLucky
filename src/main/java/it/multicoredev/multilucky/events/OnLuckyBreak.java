@@ -107,8 +107,8 @@ public class OnLuckyBreak implements Listener {
         }
         int random = new Random().nextInt(cmdsVip.size());
 
-        cmd = cmdsVip.get(random);
-        name = cmdsVipName.get(random);
+        cmd = cmds.get(random);
+        name = cmdsName.get(random);
 
         commandExecute(cmd, player, false, name);
 
@@ -131,8 +131,8 @@ public class OnLuckyBreak implements Listener {
         }
         int random = new Random().nextInt(cmdsVip.size());
 
-        cmd = cmds.get(random);
-        name = cmdsName.get(random);
+        cmd = cmdsVip.get(random);
+        name = cmdsVipName.get(random);
 
         commandExecute(cmd, player, true, name);
 

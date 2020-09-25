@@ -32,8 +32,8 @@ import java.util.LinkedList;
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 public class MultiLucky extends JavaPlugin {
-    public static Configuration config;
-    public static Configuration blocks;
+    private Configuration config;
+    private Configuration blocks;
     private LinkedList<String> cmds;
     private LinkedList<String> cmdsName;
     private LinkedList<String> cmdsVip;
@@ -44,10 +44,13 @@ public class MultiLucky extends JavaPlugin {
         try {
             initConfig();
             initBlocks();
-            initDrops();
         } catch (IOException e) {
             e.printStackTrace();
+            onDisable();
+            return;
         }
+
+        initDrops();
 
         getServer().getPluginManager().registerEvents(new OnLuckyBreak(config, blocks, cmds, cmdsName, cmdsVip, cmdsVipName), this);
         //TODO fix
@@ -56,6 +59,11 @@ public class MultiLucky extends JavaPlugin {
         getCommand("multilucky").setTabCompleter(new MultiLuckyCompleter());
 
         Chat.info("&eMultiLucky &2loaded and enabled&e!");
+    }
+
+    @Override
+    public void onDisable() {
+        Chat.info("&eMultiLucky &cdisabled");
     }
 
     private void initConfig() throws IOException {
@@ -79,10 +87,12 @@ public class MultiLucky extends JavaPlugin {
     }
 
     private void initDrops() {
-        for (String drop : blocks.getSection("luckyblock.drops").getKeys()) {
-            cmds = new LinkedList<>();
-            cmdsName = new LinkedList<>();
+        cmds = new LinkedList<>();
+        cmdsName = new LinkedList<>();
+        cmdsVip = new LinkedList<>();
+        cmdsVipName = new LinkedList<>();
 
+        for (String drop : blocks.getSection("luckyblock.drops").getKeys()) {
             int chance = blocks.getInt("luckyblock.drops." + drop + ".chance");
             String cmd = blocks.getString("luckyblock.drops." + drop + ".cmd");
             String name = blocks.getString("luckyblock.drops." + drop + ".reward-name");
@@ -94,9 +104,6 @@ public class MultiLucky extends JavaPlugin {
         }
 
         for (String drop : blocks.getSection("luckyblock-vip.drops").getKeys()) {
-            cmdsVip = new LinkedList<>();
-            cmdsVipName = new LinkedList<>();
-
             int chance = blocks.getInt("luckyblock-vip.drops." + drop + ".chance");
             String cmdVip = blocks.getString("luckyblock-vip.drops." + drop + ".cmd");
             String name = blocks.getString("luckyblock-vip.drops." + drop + ".reward-name");
@@ -106,10 +113,5 @@ public class MultiLucky extends JavaPlugin {
                 cmdsVipName.add(name);
             }
         }
-    }
-
-    @Override
-    public void onDisable() {
-        Chat.info("&eMultiLucky &cdisabled");
     }
 }

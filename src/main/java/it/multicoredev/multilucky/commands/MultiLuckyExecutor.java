@@ -2,9 +2,9 @@ package it.multicoredev.multilucky.commands;
 
 import it.multicoredev.mbcore.spigot.Chat;
 import it.multicoredev.mclib.yaml.Configuration;
-import it.multicoredev.multilucky.itemStack.ItemStackHelper;
 import it.multicoredev.multilucky.MultiLucky;
 import it.multicoredev.multilucky.Utils;
+import it.multicoredev.multilucky.itemStack.ItemStackHelper;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -104,9 +104,9 @@ public class MultiLuckyExecutor implements CommandExecutor {
 
             if (type.equalsIgnoreCase("vip")) {
                 isVip = true;
-                itemStack = itemStackHelper.getItemStack(vip, amount, true);
+                itemStack = itemStackHelper.getItemStack(config, vip, amount, true);
             } else {
-                itemStack = itemStackHelper.getItemStack(normal, amount, false);
+                itemStack = itemStackHelper.getItemStack(config, normal, amount, false);
             }
 
             ItemMeta itemMeta = itemStack.getItemMeta();
@@ -130,8 +130,8 @@ public class MultiLuckyExecutor implements CommandExecutor {
 
             return true;
         } else if (args[0].equalsIgnoreCase("reload")) {
-            plugin.onDisable();
-            plugin.onEnable();
+            Bukkit.getPluginManager().disablePlugin(plugin);
+            Bukkit.getPluginManager().enablePlugin(plugin);
 
             Chat.send(sendMessage(config.getString("messages.reload")), sender);
             return true;

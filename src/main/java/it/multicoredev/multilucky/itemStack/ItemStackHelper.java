@@ -1,6 +1,7 @@
 package it.multicoredev.multilucky.itemStack;
 
 import it.multicoredev.mclib.misc.KeyVal;
+import it.multicoredev.mclib.yaml.Configuration;
 import org.bukkit.inventory.ItemStack;
 
 /**
@@ -24,7 +25,7 @@ import org.bukkit.inventory.ItemStack;
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 public interface ItemStackHelper {
-    ItemStack getItemStack(String material, int amount, boolean isVip);
+    ItemStack getItemStack(Configuration config, String material, int amount, boolean isVip);
 
     KeyVal getMaterial(String material);
 }

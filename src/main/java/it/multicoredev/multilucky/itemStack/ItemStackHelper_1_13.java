@@ -3,7 +3,6 @@ package it.multicoredev.multilucky.itemStack;
 import it.multicoredev.mbcore.spigot.Chat;
 import it.multicoredev.mclib.misc.KeyVal;
 import it.multicoredev.mclib.yaml.Configuration;
-import it.multicoredev.multilucky.MultiLucky;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -29,8 +28,7 @@ import org.bukkit.inventory.ItemStack;
  */
 public class ItemStackHelper_1_13 implements ItemStackHelper {
     @Override
-    public ItemStack getItemStack(String material, int amount, boolean isVip) {
-        Configuration config = MultiLucky.config;
+    public ItemStack getItemStack(Configuration config, String material, int amount, boolean isVip) {
         Material block = Material.getMaterial(material);
 
         if (block == null) {
