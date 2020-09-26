@@ -102,7 +102,7 @@ public class OnLuckyBreak implements Listener {
         String name;
 
         if (!player.hasPermission("multilucky.normal")) {
-            Chat.send(sendMessage(config.getString("luckyblock-no-perms")), player);
+            Chat.send(sendMessage(config.getString("messages.luckyblock-no-perms")), player);
             event.setCancelled(true);
             return;
         }
@@ -119,7 +119,7 @@ public class OnLuckyBreak implements Listener {
     }
 
     private void vipExecute(BlockBreakEvent event) {
-        if (event.getBlock().getState().getData().getData() != blocks.getByte("messages.luckyblock-vip.data")) return;
+        if (event.getBlock().getState().getData().getData() != blocks.getByte("luckyblock-vip.data")) return;
         if (!config.getBoolean("features.luckyblock-vip")) return;
 
         Player player = event.getPlayer();
