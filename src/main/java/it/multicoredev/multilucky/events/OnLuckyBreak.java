@@ -105,7 +105,7 @@ public class OnLuckyBreak implements Listener {
             Chat.send(sendMessage(config.getString("luckyblock-no-perms")), player);
             return;
         }
-        int random = new Random().nextInt(cmdsVip.size());
+        int random = new Random().nextInt(cmds.size());
 
         cmd = cmds.get(random);
         name = cmdsName.get(random);
