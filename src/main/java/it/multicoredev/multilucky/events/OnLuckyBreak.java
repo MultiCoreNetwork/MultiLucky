@@ -103,6 +103,7 @@ public class OnLuckyBreak implements Listener {
 
         if (!player.hasPermission("multilucky.normal")) {
             Chat.send(sendMessage(config.getString("luckyblock-no-perms")), player);
+            event.setCancelled(true);
             return;
         }
         int random = new Random().nextInt(cmds.size());
@@ -127,6 +128,7 @@ public class OnLuckyBreak implements Listener {
 
         if (!player.hasPermission("multilucky.vip")) {
             Chat.send(sendMessage(config.getString("luckyblock-vip-no-perms")), player);
+            event.setCancelled(true);
             return;
         }
         int random = new Random().nextInt(cmdsVip.size());
