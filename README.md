@@ -27,7 +27,7 @@ You can customize for each type of LuckyBlock its corresponding block, the name 
 - NBTs compatibility
 - Customizable LuckyBlocks' types (depending upon permissions)
 
-##Permissions
+## Permissions
 
 - multilucky.admin (Admin Permissions -> Help, Give and Reload)
 - multilucky.normal (User Permission -> Break Normal LuckyBlock)
